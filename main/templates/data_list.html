@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product_List</title>
+</head>
+<body>
+    <h1>데이터베이스 상품목록</h1>
+    <h3>Super Users possible</h3>
+    {% if code_list %}
+    <ul>
+        {% for codes in code_list %}
+            <h1><a href="{% url 'main:data_detail' codes.code %}">{{ codes.name }}</a></h1>
+            <p>바코드 : {{ codes.code }}</p>
+            <p>가격 : {{ codes.charge }}</p>
+            <p>시간 : {{ codes.pub_date }}</p>
+            <br>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <p>자료가 없습니다.</p>
+    {% endif %}
+    <a href="{% url 'main:data_add' %}">상품추가</a><br>
+</body>
+</html>
