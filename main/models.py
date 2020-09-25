@@ -17,7 +17,7 @@ class Bar_code(models.Model):
 
 class Img(models.Model):
     title = models.CharField(max_length=20)
-    image = models.ImageField(upload_to='images/%Y/%m/%d')
+    image = models.ImageField()
     pub_date = models.DateTimeField('date published', default=timezone.now)
 
     def __str__(self):

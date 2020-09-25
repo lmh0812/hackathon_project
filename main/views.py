@@ -24,7 +24,6 @@ def product_detail(request, data_code):
 
 
 def upload_image(request):
-    img_list = Img.objects.order_by('-pub_date')[:1]
     if request.method == 'POST':
         form = UploadForm(request.POST, request.FILES)
         if form.is_valid():
@@ -34,10 +33,15 @@ def upload_image(request):
             post.save()
             if tmp:
                 result = bar_read(tmp)
-            return render(request, 'result.html', {'result':result})
+                if Bar_code.objects.get(pk=result):
+                    return HttpResponseRedirect(reverse('main:product_detail',  args=(result,)))
     else:
         form = UploadForm()
-    return render(request, 'upload_img.html', {'form':form, 'img_list':img_list})
+    return render(request, 'upload_img.html', {'form':form})
+
+# def result2(request):
+#     code_name = Bar_code.objects.get(pk=)
+#     return render(request, 'home.html', {'code_name':code_name})
 
 
 
