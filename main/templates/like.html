@@ -1,0 +1,9 @@
+<h1>{{ post.name }}</h1>
+
+<ul>
+{% for choice in post.choice_set.all %}
+    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'main:product_detail' post.code %}">Vote again?</a>

@@ -9,11 +9,17 @@ urlpatterns = [
     path('home/<int:data_code>/', views.product_detail, name='product_detail'),
 
     path('home/upload_img/', views.upload_image, name='upload_image'),
+    path('home/upload_code/', views.upload_code, name='upload_code'),
+
 
     path('home/data_list/', views.data_list, name='data_list'),
     path('home/data_add/', views.data_add, name='data_add'),
     path('home/data/<int:data_code>/', views.data_detail, name='data_detail'),
     path('home/<int:data_code>/update/', views.data_update, name='data_update'), 
     path('home/<int:data_code>/delete/', views.data_delete, name='data_delete'),
+    path('home/result', views.result, name='result'),
 
+    path('home/<int:data_code>/review', views.review, name="review"),
+    path('<int:data_code>/like/', views.like, name='like'),
+    path('<int:data_code>/vote/', views.vote, name='vote'),
 ]

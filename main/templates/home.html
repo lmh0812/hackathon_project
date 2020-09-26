@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product_List</title>
+    
 </head>
 <body>
     <h1>상품목록</h1>
-
     {% if code_list %}
     <ul>
         {% for codes in code_list %}
@@ -23,5 +23,8 @@
     {% endif %}
     <a href="{% url 'main:data_list' %}">데이터베이스</a><br>
     <a href="{% url 'main:upload_image' %}">이미지 제출</a><br>
+    <a href="{% url 'main:upload_code' %}">바코드 제출</a><br>
+    <br><br><br>
+    <a href="{% url 'main:result' %}">상품들의 총 합계 가격 보러가기</a><br>
 </body>
 </html>

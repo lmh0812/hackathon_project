@@ -6,6 +6,11 @@
     {% endif %}
     <br>
     <h1>상품명 : {{ post.name }}</h1>
+    {% if post.image %}
+
+        <img src="{{ post.image.url }}">
+
+    {% endif %}
     <p>가격 : {{ post.charge }}</p>
     <a href="{% url 'main:data_update' post.code %}">상품수정</a>
     <div class="delete">
