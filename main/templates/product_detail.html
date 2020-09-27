@@ -15,6 +15,12 @@
 
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
+    <ul>
+        {% for choice in post.choice_set.all %}
+            <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+        {% endfor %}
+    </ul>
+    
     <form action="{% url 'main:vote' post.code %}" method="POST"> <!--submit을 눌렀을 때 해당 url로 넘어감-->
         {% csrf_token %} <!--해킹 방지-->
         {% for choice in post.choice_set.all %}
@@ -23,10 +29,19 @@
         {% endfor %}
         <input type="submit" value="Vote">
     </form>
-    {% for review in review_list %}
-        <p>댓글{{ oder }} : {{ review.review_text }}</p>
-    {% endfor %}
-    <a href="{% url 'main:home' %}">main으로 돌아가기</a>
-    <a href="{% url 'main:review' post.code %}">댓글달기</a>
+
+        <form action="{% url 'main:comments_create' post.pk %}" method="post">
+            {% csrf_token %}
+            댓글 : <input type="text" name="content"/>
+                  <input type="submit" value="Submit"/>
+        </form>
+        <ul>
+            {% for comment in post.review_set.all %}
+                <span style="font-weight: bold;">댓글 : {{ comment }}</span>    
+                <span>{{ comment.pub_date }}</span>
+                <a href="{% url 'main:comments_delete' post.pk comment.pk %}">Delete</a><br>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'main:home' %}">main으로 돌아가기</a>
 
 {% endblock %}

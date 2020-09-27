@@ -19,7 +19,8 @@ urlpatterns = [
     path('home/<int:data_code>/delete/', views.data_delete, name='data_delete'),
     path('home/result', views.result, name='result'),
 
-    path('home/<int:data_code>/review', views.review, name="review"),
+    path('home/<int:post_id>/comments/create/', views.comments_create, name='comments_create'),
+    path('home/<int:post_id>/comments/<int:comment_id>/delete/', views.comments_delete, name='comments_delete'),
     path('<int:data_code>/like/', views.like, name='like'),
     path('<int:data_code>/vote/', views.vote, name='vote'),
 ]

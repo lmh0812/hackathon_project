@@ -1,13 +1,12 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from .forms import PostForm, UploadForm_Img, UploadForm_Code, Multi_Upload, ReviewForm
 from django.utils import timezone
 
 from main.models import Bar_code, Upload_Img, Upload_Code, Upload, Review
 from .bar_read import bar_read
 from django.conf import settings
-
 
 
 # Create your views here.
@@ -21,8 +20,7 @@ def home(request):
 
 def product_detail(request, data_code):
     post = get_object_or_404(Bar_code, pk=data_code)
-    review_list = Review.objects.order_by('-pub_date')[:]
-    return render(request, 'product_detail.html', {'post': post, 'review_list': review_list})
+    return render(request, 'product_detail.html', {'post': post})
 
 
 
@@ -113,6 +111,7 @@ def result(request):
         form = Multi_Upload(request.POST, request.FILES)
         files = request.FILES.getlist('image')
         result = 0
+        bar_list = []
         if form.is_valid():
             for f in files:
                 file_instance = Upload(image=f)
@@ -124,7 +123,8 @@ def result(request):
                     res = bar_read(tmp)
                     if res == Bar_code.objects.get(pk=res).pk:
                         result += Bar_code.objects.get(pk=res).charge
-            return render(request, 'result.html', {'result': result})
+                        bar_list.append("코드: " + str(Bar_code.objects.get(pk=res).code) +" \t상품명: "+ Bar_code.objects.get(pk=res).name +" \t가격: "+ str(Bar_code.objects.get(pk=res).charge))
+            return render(request, 'result.html', {'result': result, 'bar_list':bar_list})
     else:
         form = Multi_Upload()
     return render(request, 'upload_img.html', {'form': form})
@@ -132,18 +132,22 @@ def result(request):
 
 
 
-def review(request, data_code):
-    if request.method == "POST":
-        form = ReviewForm(request.POST)
-        form.instance.code_name_id = Bar_code.objects.get(pk=data_code).pk
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.pub_date = timezone.now()
-            post.save()
-        return HttpResponseRedirect(reverse('main:product_detail', args=(data_code,)))
-    else:
-        form = ReviewForm()
-    return render(request, 'review.html', {'form': form})
+
+def comments_create(request, post_id):
+    post = Bar_code.objects.get(pk=post_id).pk
+    content = request.POST.get('content')
+    comment = Review(code_name_id=int(post), review_text=content)
+    comment.save()
+
+    return HttpResponseRedirect(reverse('main:product_detail', args=(post_id,)))
+
+def comments_delete(request, post_id, comment_id):
+    comment = Review.objects.get(pk=comment_id)
+    comment.delete()
+    
+    return HttpResponseRedirect(reverse('main:product_detail', args=(post_id,)))
+
+
 
  
 
@@ -164,4 +168,4 @@ def vote(request, data_code):
     else:
         selected_choice.votes += 1
         selected_choice.save()
-        return HttpResponseRedirect(reverse('main:like', args=(data_code,)))
+        return HttpResponseRedirect(reverse('main:product_detail', args=(data_code,)))
