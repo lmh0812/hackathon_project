@@ -11,6 +11,7 @@ class Bar_code(models.Model):
     name = models.CharField(max_length=30, null=False)
     image = models.ImageField(blank=True, null=True)
     pub_date = models.DateTimeField('date published', default=timezone.now)
+    id = models.IntegerField(null=True, blank=True)
     # author = models.ForeignKey(related_name='bar_code_set', on_delete=models.CASCADE)
 
     def __str__(self):

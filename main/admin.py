@@ -7,10 +7,13 @@ from import_export.admin import ExportActionModelAdmin, ImportExportMixin, Impor
 class Bar_code_Admin(ImportExportMixin, admin.ModelAdmin):
     pass
 
+class Choice_Admin(ImportExportMixin, admin.ModelAdmin):
+    pass
+
 admin.site.register(Bar_code, Bar_code_Admin)
 
 admin.site.register(Upload_Img)
 admin.site.register(Upload_Code)
 admin.site.register(Review)
-admin.site.register(Choice)
+admin.site.register(Choice, Choice_Admin)
 admin.site.register(Upload)
