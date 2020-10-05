@@ -1,4 +1,6 @@
+{% extends 'blog/base.html' %}
 {% block content %}
+<div class="container">
     {% if post.id %}
 
         <p>바코드 : {{ post.code }}</p>
@@ -8,7 +10,7 @@
     <h1>상품명 : {{ post.name }}</h1>
     {% if post.image %}
 
-        <img src="{{ post.image.url }}">
+        <img src="{{ post.image.url }}" width="400">
 
     {% endif %}
     <p>가격 : {{ post.charge }}</p>
@@ -43,5 +45,5 @@
             {% endfor %}
         </ul>
         <a href="{% url 'main:home' %}">main으로 돌아가기</a>
-
+</div>
 {% endblock %}

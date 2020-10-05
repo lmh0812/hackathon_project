@@ -23,4 +23,6 @@ urlpatterns = [
     path('home/<int:post_id>/comments/<int:comment_id>/delete/', views.comments_delete, name='comments_delete'),
     path('<int:data_code>/like/', views.like, name='like'),
     path('<int:data_code>/vote/', views.vote, name='vote'),
+
+    path('home/introduce/', views.introduce, name='introduce'),
 ]

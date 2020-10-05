@@ -169,3 +169,6 @@ def vote(request, data_code):
         selected_choice.votes += 1
         selected_choice.save()
         return HttpResponseRedirect(reverse('main:product_detail', args=(data_code,)))
+
+def introduce(request):
+    return render(request,'introduce.html')
