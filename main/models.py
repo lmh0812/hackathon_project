@@ -11,8 +11,21 @@ class Bar_code(models.Model):
     name = models.CharField(max_length=30, null=False)
     image = models.ImageField(blank=True, null=True)
     pub_date = models.DateTimeField('date published', default=timezone.now)
-    id = models.IntegerField(null=True, blank=True)
+    id = models.IntegerField(blank=True, null=True)
     # author = models.ForeignKey(related_name='bar_code_set', on_delete=models.CASCADE)
+
+    total = models.IntegerField(blank=True, null=True)
+    provision = models.FloatField(blank=True, null=True)
+    kcal = models.FloatField(blank=True, null=True)
+    carbo = models.FloatField(blank=True, null=True)
+    sugar = models.FloatField(blank=True, null=True)
+    protein = models.FloatField(blank=True, null=True)
+    fat = models.FloatField(blank=True, null=True)
+    sat_fat = models.FloatField(blank=True, null=True)
+    tra_fat = models.FloatField(blank=True, null=True)
+    colestrol = models.FloatField(blank=True, null=True)
+    natrium = models.FloatField(blank=True, null=True)
+
 
     def __str__(self):
         return self.name

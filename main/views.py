@@ -4,7 +4,7 @@ from django.urls import reverse, reverse_lazy
 from .forms import PostForm, UploadForm_Img, UploadForm_Code, Multi_Upload, ReviewForm
 from django.utils import timezone
 
-from main.models import Bar_code, Upload_Img, Upload_Code, Upload, Review
+from main.models import Bar_code, Upload_Img, Upload_Code, Upload, Review, Choice
 from .bar_read import bar_read
 from django.conf import settings
 
@@ -127,7 +127,7 @@ def result(request):
             return render(request, 'result.html', {'result': result, 'bar_list':bar_list})
     else:
         form = Multi_Upload()
-    return render(request, 'upload_img.html', {'form': form})
+    return render(request, 'upload_img_total.html', {'form': form})
 
 
 
@@ -172,3 +172,38 @@ def vote(request, data_code):
 
 def introduce(request):
     return render(request,'introduce.html')
+
+def cal_result(request):
+    if request.method == "POST":
+        form = Multi_Upload(request.POST, request.FILES)
+        files = request.FILES.getlist('image')
+        result1 = 0
+        result2 = 0
+        result3 = 0
+        result4 = 0
+        result5 = 0
+        bar_list = []
+        if form.is_valid():
+            for f in files:
+                file_instance = Upload(image=f)
+                file_instance.save()   
+                imageURL = settings.MEDIA_URL + str(f)
+                tmp = settings.MEDIA_ROOT_URL + imageURL
+                form.save()
+                if tmp:
+                    res = bar_read(tmp)
+                    if res == Bar_code.objects.get(pk=res).pk:
+                        result1 += Bar_code.objects.get(pk=res).total
+                        result2 += Bar_code.objects.get(pk=res).kcal
+                        result3 += Bar_code.objects.get(pk=res).carbo
+                        result4 += Bar_code.objects.get(pk=res).protein
+                        result5 += Bar_code.objects.get(pk=res).fat
+                        bar_list.append("총 제공량 : " + str(Bar_code.objects.get(pk=res).total)+"g" 
+                        +" \t열량: "+ str(Bar_code.objects.get(pk=res).kcal)+"g" 
+                        +" \t탄수화물: "+ str(Bar_code.objects.get(pk=res).carbo)+"g"
+                        +" \t단백질: "+ str(Bar_code.objects.get(pk=res).protein)+"g"
+                        +" \t지방: "+ str(Bar_code.objects.get(pk=res).fat)+"g")
+            return render(request, 'cal_result.html', {'result1': result1, 'result2': result2, 'result3': result3, 'result4': result4, 'result5': result5, 'bar_list':bar_list})
+    else:
+        form = Multi_Upload()
+    return render(request, 'upload_img_cal.html', {'form': form})

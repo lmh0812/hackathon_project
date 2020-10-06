@@ -2,18 +2,18 @@
 {% block content %}
 <div class="container">
     {% if post.id %}
-
-        <p>바코드 : {{ post.code }}</p>
+    <br><br><br>
+        <h2 style="color:skyblue;"> [{{ post.code }}]</h2>
 
     {% endif %}
     <br>
-    <h1>상품명 : {{ post.name }}</h1>
+    <h1 style="font-weight:bold"> 상품명 [{{ post.name }}]</h1>
     {% if post.image %}
 
         <img src="{{ post.image.url }}" width="400">
 
     {% endif %}
-    <p>가격 : {{ post.charge }}</p>
+    <p style="font-weight:bold;color:crimson">희망소비자가격 \{{ post.charge }}</p>
 
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
@@ -29,21 +29,57 @@
             <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}"> <!--submit을 누르면 value값이 넘어감-->
             <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
         {% endfor %}
-        <input type="submit" value="Vote">
+        <br>
+        <button type="submit" class="btn btn-dark">투표하기</button>
     </form>
 
         <form action="{% url 'main:comments_create' post.pk %}" method="post">
             {% csrf_token %}
-            댓글 : <input type="text" name="content"/>
-                  <input type="submit" value="Submit"/>
+            <br>
+                  <input type="text" name="content"/>
+                  <button type="submit" class="btn btn-dark">댓글달기</button>
         </form>
         <ul>
             {% for comment in post.review_set.all %}
-                <span style="font-weight: bold;">댓글 : {{ comment }}</span>    
+                <span style="font-weight: bold;">└ {{ comment }}</span>    
                 <span>{{ comment.pub_date }}</span>
                 <a href="{% url 'main:comments_delete' post.pk comment.pk %}">Delete</a><br>
             {% endfor %}
         </ul>
         <a href="{% url 'main:home' %}">main으로 돌아가기</a>
+
+        {% if post.total %}
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td><B>총 제공량</B></td>
+                    <td><B>열량</B></td>
+                    <td><B>탄수화물</B></td>
+                    <td><B>당류</B></td>
+                    <td><B>단백질</B></td>
+                    <td><B>지방</B></td>
+                    <td><B>포화지방</B></td>
+                    <td><B>트렌스지방</B></td>
+                    <td><B>콜레스트롤</B></td>
+                    <td><B>나트륨</B></td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>{{ post.total }}g</td>
+                    <td>{{ post.kcal }}g</td>
+                    <td>{{ post.carbo }}g</td>
+                    <td>{{ post.sugar }}g</td>
+                    <td>{{ post.protein }}g</td>
+                    <td>{{ post.fat }}g</td>
+                    <td>{{ post.sat_fat }}g</td>
+                    <td>{{ post.tra_fat }}g</td>
+                    <td>{{ post.colestrol }}g</td>
+                    <td>{{ post.natrium }}g</td>
+                </tr>
+                </tbody>
+            </table>
+        {% endif %}   
 </div>
+<br><br><br><br><br> <br><br><br><br> <br><br><br><br> <br><br><br><br>
 {% endblock %}

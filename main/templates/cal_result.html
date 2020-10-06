@@ -1,0 +1,32 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <h1>이 상품들의 영양성분은?</h1>
+    {% for bar in bar_list %}
+        {{ bar }}<br>
+    {% endfor %}
+
+
+<br><br><br><br><br><br><br><br>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td><B>총 제공량</B></td>
+            <td><B>총 열량</B></td>
+            <td><B>총 탄수화물</B></td>
+            <td><B>총 단백질</B></td>
+            <td><B>총 지방</B></td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><h1>{{ result1 }}g</h1></td>
+            <td><h1>{{ result2 }}g</h1></td>
+            <td><h1>{{ result3 }}g</h1></td>
+            <td><h1>{{ result4 }}g</h1></td>
+            <td><h1>{{ result5 }}g</h1></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <a href="{% url 'main:home' %}">다시하기</a>
+{% endblock %}

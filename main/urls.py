@@ -25,4 +25,6 @@ urlpatterns = [
     path('<int:data_code>/vote/', views.vote, name='vote'),
 
     path('home/introduce/', views.introduce, name='introduce'),
+
+    path('home/cal_result', views.cal_result, name='cal_result'),
 ]

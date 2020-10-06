@@ -1,9 +1,12 @@
-<h1>이 상품들의 가격은?</h1>
-{% for bar in bar_list %}
-    {{ bar }}<br>
-{% endfor %}
+{% extends 'blog/base.html' %}
+{% block content %}
+    <h1>이 상품들의 가격은?</h1>
+    {% for bar in bar_list %}
+        {{ bar }}<br>
+    {% endfor %}
 
+<br><br><br><br><br><br>
+    <h1>합계 : {{ result }}원</h1>
 
-<h1>합계 : {{ result }}원</h1>
-
-<a href="{% url 'main:home' %}">다시하기</a>
+    <a href="{% url 'main:home' %}">다시하기</a>
+{% endblock %}

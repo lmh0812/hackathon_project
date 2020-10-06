@@ -12,33 +12,54 @@
 <body>
     <br><br>
     <div class="container">
-    <center>
-        <a href="{% url 'main:data_list' %}"><img src= "/static/img/data.png" alt="데이터베이스"width="40"  ></img></a>
-        &nbsp &nbsp &nbsp &nbsp
-        <a href="{% url 'main:upload_image'%}"><img src= "/static/img/search.png" alt="이미지 업로드"width="150"  ></img></a>
-    </center>
+        <center>
+        <div><a href="{% url 'main:upload_image'%}"><img src= "/static/img/photosc.png"  alt="이미지 업로드"width="300"  ></img></a>
+        <a href="{% url 'main:upload_code' %}"><img src= "/static/img/codesc.png"   alt="이미지 업로드"width="300" ></img></a>
+        <a href="{% url 'main:result' %}"><img src= "/static/img/sumsc.png"  alt="이미지 업로드"width="300"  ></img></a></div>
+        </center>
+
     <br><br>
+    <br><br>
+    <br><br>
+    
     <img src= "/static/img/product.png" alt="제품"width="55"  >
     <br><br>
+    <div class="row">
     {% if code_list %}
-    <ul>
         {% for codes in code_list %}
-            <h1><a href="{% url 'main:product_detail' codes.code %}">{{ codes.name }}</a></h1>
-            <p>바코드 : {{ codes.code }}</p>
-            <p>가격 : {{ codes.charge }}</p>
-            <p>시간 : {{ codes.pub_date }}</p>
-            <br>
+        <div class="col-md-4">
+            <div class="container">                
+                <div class="card" style="width: 18rem;">
+                <div class="card-body">
+                <h1 style="font-weight:bold; color:black"><a href="{% url 'main:product_detail' codes.code %}">{{ codes.name }}</a></h1>
+                <p style="font-weight:bold">바코드 [{{ codes.code }}]</p>
+                <p style="font-weight:bold; color:crimson">희망소비자가격 \{{ codes.charge }}</p>
+                <p style="color:rgb(206, 199, 199)">등록일시 {{ codes.pub_date }}</p>
+            </div>
+        </div>
+    </div>
+</div>
         {% endfor %}
-    </ul>
     {% else %}
         <p>자료가 없습니다.</p>
     {% endif %}
+</div>
     <!-- <a href="{% url 'main:data_list' %}">데이터베이스</a><br> -->
     <!-- <a href="{% url 'main:upload_image' %}">이미지 제출</a><br> -->
-    <a href="{% url 'main:upload_code' %}">바코드 제출</a><br>
+    <a href="{% url 'main:cal_result' %}">상품들의 총 합계 영양성분 보러가기</a><br>
+
     <br><br><br>
-    <a href="{% url 'main:result' %}">상품들의 총 합계 가격 보러가기</a><br>
-    <br><br><br><br> <br><br><br><br> <br><br><br><br> <br><br><br><br>
+    <br><br><br><br> <br><br><br><br> <br><br><br><br>
+    <footer class="text-muted">
+        <div class="container">
+          <p class="float-right">
+            <a href="#" style="font-weight:bold ;color:red">맨 위로</a>
+          </p>
+
+    <center>
+    <a href="{% url 'main:data_list' %}"><img src= "/static/img/data.png" alt="데이터베이스"width="40"  ></img></a>
+    </center>
+    <br><br><br><br>
 </body>
 </html>
 

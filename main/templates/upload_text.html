@@ -1,11 +1,21 @@
+{% extends 'blog/base.html' %}
 {% block content %}
-    <h2>Upload BAR-CODE</h2>
-    <form method="POST" enctype="multipart/form-data">
+&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp 
+<br><br>
+<center>
+    <img src= "/static/img/cdsc.png" alt="사진검색"width="200"></img>
+    <br><br><br>
+
+        <form method="POST" enctype="multipart/form-data" style="color:gray">
         {% csrf_token %}
         {{ form }}
-        <button type="submit">검색</button>
+
+        <button type="submit" class="btn btn-danger">검색하기</button>
     </form>
-    <br><br>
+
+    
+    <br><br><br><br> <br><br><br><br> <br><br><br><br>
+</center>
 
     
 {% endblock %}

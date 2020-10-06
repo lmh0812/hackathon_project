@@ -3,16 +3,19 @@
 &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp 
 <br><br>
 <center>
-    <img src= "/static/img/sch.png" alt="사진검색"width="180"></img>
+    <img src= "/static/img/circ.png" alt="사진검색"width="180"></img>
+
     <br><br><br>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
         
      <button type="submit" class="btn btn-danger">비교하기</button>
-
+     <br><br>
+     <img src= "/static/img/notice.png" alt="사진검색"width="300"></img>
     </form>
     <br><br><br><br> <br><br><br><br> <br><br><br><br>
+
 </center>
 
     
