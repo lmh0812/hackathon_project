@@ -22,10 +22,12 @@ ROOT_DIR = os.path.dirname(BASE_DIR)
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'udz3ykwe&8rvj6@vcn*6$jbw4=kv#2hav9-l34(8^4t*db$^=w'
+# SECRET_KEY = 'udz3ykwe&8rvj6@vcn*6$jbw4=kv#2hav9-l34(8^4t*db$^=w'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag’)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = bool( os.environ.get('DJANGO_DEBUG', True) )
 
 ALLOWED_HOSTS = []
 
@@ -45,6 +47,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -134,3 +137,7 @@ AUTH_USER_MODEL = 'user.MyUser'
 
 STATICFILES_DIR=[os.path.join(BASE_DIR, 'static'),]
 STATIC_ROOT = os.path.join(ROOT_DIR, '.static_root')
+
+import dj_database_url
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(db_from_env)
