@@ -1,3 +1,12 @@
+<meta charset="UTF-8">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="shortcut icon" href="/static/icon/fav.ico">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        
+    
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,22 +15,33 @@
     <title>Product_List</title>
 </head>
 <body>
-    <h1>데이터베이스 상품목록</h1>
-    <h3>Super Users possible</h3>
-    {% if code_list %}
-    <ul>
-        {% for codes in code_list %}
-            <h1><a href="{% url 'main:data_detail' codes.code %}">{{ codes.name }}</a></h1>
-            <p>바코드 : {{ codes.code }}</p>
-            <p>가격 : {{ codes.charge }}</p>
-            <p>시간 : {{ codes.pub_date }}</p>
-            <br>
-        {% endfor %}
-    </ul>
-    {% else %}
-        <p>자료가 없습니다.</p>
-    {% endif %}
+    <br><br><br><br><br><br>
+    <center>
+
+    <div class="row">
+        {% if code_list %}
+            {% for codes in code_list %}
+            <div class="col-md-4">
+                <div class="container">                
+                    <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                    <h1 style="font-weight:bold; color:black"><a href="{% url 'main:data_detail' codes.code %}">{{ codes.name }}</a></h1>
+                    <p style="font-weight:bold">바코드 [{{ codes.code }}]</p>
+                    <p style="font-weight:bold; color:crimson">희망소비자가격 {{ codes.charge }}</p>
+                    <p style="color:rgb(206, 199, 199)">등록일시 {{ codes.pub_date }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+            {% endfor %}
+        {% else %}
+            <p>자료가 없습니다.</p>
+        {% endif %}
+    </div>   
+    <br><br><br><br><br><br>
     <a href="{% url 'main:data_add' %}">상품추가</a><br>
-    <a href="{% url 'main:home' %}">main으로 돌아가기</a><br>
+    <br><br><br><br><br><br>
+</center>
 </body>
 </html>
+{% endblock content %}

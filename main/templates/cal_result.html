@@ -1,12 +1,17 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-    <h1>이 상품들의 영양성분은?</h1>
+<center>
+    <br><br><br><br>
+    <h1 style="font-weight:bold;color:rgb(137, 137, 240)">이 상품들의 영양성분은?</h1>
+    {% for bar in bar_list %}
+        <!-- {{ bar }}<br> -->
+    {% endfor %}
     {% for bar in bar_list %}
         {{ bar }}<br>
     {% endfor %}
 
 
-<br><br><br><br><br><br><br><br>
+<br><br><br><br>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -27,6 +32,10 @@
         </tr>
         </tbody>
     </table>
+    <br><br><br><br>
+    <a href="{% url 'main:cal_result' %}" style="font-weight: bold;">다시하기</a>
+    <br><br><br><br>
+    <br><br><br><br>
+</center>
 
-    <a href="{% url 'main:home' %}">다시하기</a>
 {% endblock %}

@@ -7,7 +7,7 @@
 
     {% endif %}
     <br>
-    <h1 style="font-weight:bold"> 상품명 [{{ post.name }}]</h1>
+    <h1 style="font-weight:bold"> 상품명 [{{ post.manufacturer }}][{{ post.name }}]</h1>
     {% if post.image %}
 
         <img src="{{ post.image.url }}" width="400">
@@ -49,6 +49,8 @@
         <a href="{% url 'main:home' %}">main으로 돌아가기</a>
 
         {% if post.total %}
+            <p>총 제공량을 제외한 영양성분은 1회 제공량이 기준입니다</p>
+            <p>1회 제공량 : {{ post.once }}g</p>
             <table class="table table-striped">
                 <thead>
                 <tr>

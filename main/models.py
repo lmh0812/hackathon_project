@@ -13,8 +13,10 @@ class Bar_code(models.Model):
     pub_date = models.DateTimeField('date published', default=timezone.now)
     id = models.IntegerField(blank=True, null=True)
     # author = models.ForeignKey(related_name='bar_code_set', on_delete=models.CASCADE)
+    manufacturer = models.CharField(max_length=30, blank=True, null=True)
 
     total = models.IntegerField(blank=True, null=True)
+    once = models.IntegerField(blank=True, null=True)
     provision = models.FloatField(blank=True, null=True)
     kcal = models.FloatField(blank=True, null=True)
     carbo = models.FloatField(blank=True, null=True)
