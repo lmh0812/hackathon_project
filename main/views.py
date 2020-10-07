@@ -224,3 +224,6 @@ def cal_result(request):
     else:
         form = Multi_Upload()
     return render(request, 'upload_img_cal.html', {'form': form})
+
+def testt(request):
+    return render(request,'testt.html')
