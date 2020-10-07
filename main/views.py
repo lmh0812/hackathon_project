@@ -54,6 +54,9 @@ def upload_code(request):
                 return HttpResponseRedirect(reverse('main:product_detail',  args=(result,)))
             # except (KeyError, Choice.DoesNotExist):
             #     return render(request, 'upload_text.html', {'error_message': "Nothing DB",})
+            else:
+                message = "DB에 등록되어 있지 않습니다"
+                return render(request, 'upload_text.html', {'form':form, 'message':message})
     else:
         form = UploadForm_Code()
     return render(request, 'upload_text.html', {'form':form})
@@ -193,16 +196,20 @@ def cal_result(request):
                 if tmp:
                     res = bar_read(tmp)
                     if res == Bar_code.objects.get(pk=res).pk:
-                        result1 += Bar_code.objects.get(pk=res).total
-                        result2 += Bar_code.objects.get(pk=res).kcal
-                        result3 += Bar_code.objects.get(pk=res).carbo
-                        result4 += Bar_code.objects.get(pk=res).protein
-                        result5 += Bar_code.objects.get(pk=res).fat
-                        bar_list.append("총 제공량 : " + str(Bar_code.objects.get(pk=res).total)+"g" 
-                        +" \t열량: "+ str(Bar_code.objects.get(pk=res).kcal)+"g" 
-                        +" \t탄수화물: "+ str(Bar_code.objects.get(pk=res).carbo)+"g"
-                        +" \t단백질: "+ str(Bar_code.objects.get(pk=res).protein)+"g"
-                        +" \t지방: "+ str(Bar_code.objects.get(pk=res).fat)+"g")
+                        if Bar_code.objects.get(pk=res).total:
+                            result1 += Bar_code.objects.get(pk=res).total
+                            result2 += Bar_code.objects.get(pk=res).kcal
+                            result3 += Bar_code.objects.get(pk=res).carbo
+                            result4 += Bar_code.objects.get(pk=res).protein
+                            result5 += Bar_code.objects.get(pk=res).fat
+                            bar_list.append("총 제공량 : " + str(Bar_code.objects.get(pk=res).total)+"g" 
+                            +" \t열량: "+ str(Bar_code.objects.get(pk=res).kcal)+"g" 
+                            +" \t탄수화물: "+ str(Bar_code.objects.get(pk=res).carbo)+"g"
+                            +" \t단백질: "+ str(Bar_code.objects.get(pk=res).protein)+"g"
+                            +" \t지방: "+ str(Bar_code.objects.get(pk=res).fat)+"g")
+                        else:
+                            message = "영양성분이 없습니다."
+                            return render(request, 'upload_img_cal.html', {'form': form, 'message':message})
             return render(request, 'cal_result.html', {'result1': result1, 'result2': result2, 'result3': result3, 'result4': result4, 'result5': result5, 'bar_list':bar_list})
     else:
         form = Multi_Upload()
