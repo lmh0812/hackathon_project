@@ -7,17 +7,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>제품목록</title>
+    <style>
+        .col-md-4 {
+            float: left;
+            max-width: 100%;
+        }
+        .card {
+            height: 100%;
+            margin: 5%;
+            border: 2px solid #73AD21;
+        }
+    </style>
 </head>
+
 
 <body>
     <br><br>
-    <div class="container">
         <center>
-        <div><a href="{% url 'main:upload_image'%}"><img src= "/static/img/photosc.png"  alt="이미지 업로드"width="300"  ></img></a>
-        <a href="{% url 'main:upload_code' %}"><img src= "/static/img/codesc.png"   alt="이미지 업로드"width="300" ></img></a>
-        <a href="{% url 'main:result' %}"><img src= "/static/img/sumsc.png"  alt="이미지 업로드"width="300"  ></img></a></div>
+        <a href="{% url 'main:upload_image'%}"><img src= "/static/img/photosc.png"  alt="이미지 업로드" style="max-width: 20%; height:auto;" ></img></a>
+        <a href="{% url 'main:upload_code' %}"><img src= "/static/img/codesc.png"   alt="이미지 업로드" style="max-width: 20%; height:auto;" ></img></a>
+        <a href="{% url 'main:result' %}"><img src= "/static/img/sumsc.png"  alt="이미지 업로드" style="max-width: 20%; height:auto;" ></img></a>
         </center>
 
+    <br><br>
     <br><br>
     <br><br>
     <br><br>
@@ -27,23 +39,23 @@
     <div class="row">
     {% if code_list %}
         {% for codes in code_list %}
-        <div class="col-md-4">
-            <div class="container">                
-                <div class="card" style="width: 18rem;">
-                <div class="card-body">
-                <h1 style="font-weight:bold; color:black"><a href="{% url 'main:product_detail' codes.code %}">{{ codes.name }}</a></h1>
-                <p style="font-weight:bold">바코드 [{{ codes.code }}]</p>
-                <p style="font-weight:bold; color:crimson">희망소비자가격 \{{ codes.charge }}</p>
-                <p style="color:rgb(206, 199, 199)">등록일시 {{ codes.pub_date }}</p>
+            <div class="col-md-4" >
+                <div class="containers">                
+                    <div class="card" >
+                    <div class="card-body">
+                    <h1 style="font-weight:bold; color:black"><a href="{% url 'main:product_detail' codes.code %}">{{ codes.name }}</a></h1>
+                    <p style="font-weight:bold">바코드 [{{ codes.code }}]</p>
+                    <p style="font-weight:bold; color:crimson">희망소비자가격 \{{ codes.charge }}</p>
+                    <p style="color:rgb(206, 199, 199)">등록일시 {{ codes.pub_date }}</p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
         {% endfor %}
-    {% else %}
-        <p>자료가 없습니다.</p>
-    {% endif %}
-</div>
+        {% else %}
+            <p>자료가 없습니다.</p>
+        {% endif %}
+    </div>
     <!-- <a href="{% url 'main:data_list' %}">데이터베이스</a><br> -->
     <!-- <a href="{% url 'main:upload_image' %}">이미지 제출</a><br> -->
 
@@ -58,7 +70,7 @@
     <center>
     <a href="{% url 'main:data_list' %}"><img src= "/static/img/data.png" alt="데이터베이스"width="40"  ></img></a>
     </center>
-    <br><br><br><br>
+
 </body>
 </html>
 

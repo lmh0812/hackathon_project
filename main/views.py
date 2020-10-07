@@ -15,7 +15,7 @@ def index(request):
     return render(request, 'index.html')
 
 def home(request):
-    code_list = Bar_code.objects.order_by('-pub_date')[:]
+    code_list = Bar_code.objects.order_by('-pub_date')[:9]
     return render(request, 'home.html', {'code_list':code_list})
 
 def product_detail(request, data_code):

@@ -13,6 +13,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product_List</title>
+    <style>
+        .col-md-4 {
+            float: left;
+            max-width: 100%;
+        }
+        .card {
+            height: 100%;
+            margin: 5%;
+            border: 2px solid #73AD21;
+        }
+    </style>
 </head>
 <body>
     <br><br><br><br><br><br>
@@ -23,7 +34,7 @@
             {% for codes in code_list %}
             <div class="col-md-4">
                 <div class="container">                
-                    <div class="card" style="width: 18rem;">
+                    <div class="card">
                     <div class="card-body">
                     <h1 style="font-weight:bold; color:black"><a href="{% url 'main:data_detail' codes.code %}">{{ codes.name }}</a></h1>
                     <p style="font-weight:bold">바코드 [{{ codes.code }}]</p>

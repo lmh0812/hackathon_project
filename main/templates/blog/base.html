@@ -9,33 +9,46 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
         
-        
-            <nav class="navbar navbar-light bg-light">
-              
-              <a href="{% url 'main:index' %}"><img src= "/static/img/logo.png" alt="로고"width="220"  ></img></a>
-              <a href="{% url 'main:home' %}"><img src= "/static/img/home.png" alt="홈페이지"width="75"  ></img></a>
-              <a href="{% url 'main:introduce' %}"><img src= "/static/img/intro.png" alt="소개"width="35"  ></img></a>
-              <a href="{% url 'main:cal_result' %}"><img src= "/static/img/total.png" alt="열량계산"width="100"  ></img></a>
-              &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp 
-              &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp
-              &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp
-              <a><img src= "/static/img/main.png" alt="메인"width="1870"  ></img></a>  
-                <form class="form-inline">
-                  <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-                  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
-                </form>
-              </nav>
-              <style type="text/css">
+        <style>
+          .container {
+              width:100vw;
+              height:100vh;
+          } 
+          img {
+            max-width: 100%;
+            height: auto !important;
+          }
+        </style>
+      
+        <style type="text/css">
 
-                body {
-                  font-family:'고딕';
+          body {
+            font-family:'고딕';
                   font-size:10pt;
-                }
+            }
                 
-                </style>
+        </style>
     </head>
+    <body>
+      <nav class="navbar navbar-light bg-light">
+              
+        <a href="{% url 'main:index' %}"><img src= "/static/img/logo.png" alt="로고"width="220"  ></img></a>
+        <a href="{% url 'main:home' %}"><img src= "/static/img/home.png" alt="홈페이지"width="75"  ></img></a>
+        <a href="{% url 'main:introduce' %}"><img src= "/static/img/intro.png" alt="소개"width="35"  ></img></a>
+        <a href="{% url 'main:cal_result' %}"><img src= "/static/img/total.png" alt="열량계산"width="100"  ></img></a>
+        &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp 
+        &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp
+        &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp
+        <a><img src= "/static/img/main.png" alt="메인"width="1870"  ></img></a>  
+          <form class="form-inline">
+            <!-- <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+          </form>
+        </nav>
+    </body>
 </html>
 
     {% block content %}
 
     {% endblock %}
+
