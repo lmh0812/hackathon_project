@@ -1,5 +1,5 @@
 import cv2
-import pyzbar.pyzbar import decode
+from pyzbar.pyzbar import decode
 from django.conf import settings
 
 def bar_read(path):
