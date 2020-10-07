@@ -33,10 +33,14 @@ def upload_image(request):
             imageURL = settings.MEDIA_URL + form.instance.image.name
             tmp = settings.MEDIA_ROOT_URL + imageURL
             post.save()
-            if tmp:
-                result = bar_read(tmp)
-                if result == Bar_code.objects.get(pk=result).pk:
-                    return HttpResponseRedirect(reverse('main:product_detail',  args=(result,)))
+            try:
+                if tmp:
+                    result = bar_read(tmp)
+                    if result == Bar_code.objects.get(pk=result).pk:
+                        return HttpResponseRedirect(reverse('main:product_detail',  args=(result,)))
+            except:
+                message = "DB에 등록되어 있지 않는 상품입니다"
+                return render(request, 'upload_img.html', {'message': message,})
     else:
         form = UploadForm_Img()
     return render(request, 'upload_img.html', {'form':form})
@@ -49,14 +53,12 @@ def upload_code(request):
             # post.pub_date = timezone.now()
             # post.save()
             result = post.title
-            # try:
-            if result == Bar_code.objects.get(pk=result).pk:
-                return HttpResponseRedirect(reverse('main:product_detail',  args=(result,)))
-            # except (KeyError, Choice.DoesNotExist):
-            #     return render(request, 'upload_text.html', {'error_message': "Nothing DB",})
-            else:
-                message = "DB에 등록되어 있지 않습니다"
-                return render(request, 'upload_text.html', {'form':form, 'message':message})
+            try:
+                if result == Bar_code.objects.get(pk=result).pk:
+                    return HttpResponseRedirect(reverse('main:product_detail',  args=(result,)))
+            except:
+                message = "DB에 등록되어 있지 않는 상품입니다"
+                return render(request, 'upload_text.html', {'message': message,})
     else:
         form = UploadForm_Code()
     return render(request, 'upload_text.html', {'form':form})
@@ -122,11 +124,15 @@ def result(request):
                 imageURL = settings.MEDIA_URL + str(f)
                 tmp = settings.MEDIA_ROOT_URL + imageURL
                 form.save()
-                if tmp:
-                    res = bar_read(tmp)
-                    if res == Bar_code.objects.get(pk=res).pk:
-                        result += Bar_code.objects.get(pk=res).charge
-                        bar_list.append("코드: " + str(Bar_code.objects.get(pk=res).code) +" \t상품명: "+ Bar_code.objects.get(pk=res).name +" \t가격: "+ str(Bar_code.objects.get(pk=res).charge))
+                try:
+                    if tmp:
+                        res = bar_read(tmp)
+                        if res == Bar_code.objects.get(pk=res).pk:
+                            result += Bar_code.objects.get(pk=res).charge
+                            bar_list.append("코드: " + str(Bar_code.objects.get(pk=res).code) +" \t상품명: "+ Bar_code.objects.get(pk=res).name +" \t가격: "+ str(Bar_code.objects.get(pk=res).charge))
+                except:
+                    message = "DB에 등록되어 있지 않는 상품이 존재합니다"
+                    return render(request, 'upload_img_total.html', {'message': message,})
             return render(request, 'result.html', {'result': result, 'bar_list':bar_list})
     else:
         form = Multi_Upload()
