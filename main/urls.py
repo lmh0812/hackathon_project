@@ -27,6 +27,4 @@ urlpatterns = [
     path('home/introduce/', views.introduce, name='introduce'),
 
     path('home/cal_result', views.cal_result, name='cal_result'),
-    
-    path('home/testt', views.testt, name='testt'),
 ]
