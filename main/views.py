@@ -210,7 +210,7 @@ def cal_result(request):
                                 result4 += Bar_code.objects.get(pk=res).protein
                                 result5 += Bar_code.objects.get(pk=res).fat
                                 bar_list.append("총 제공량 : " + str(Bar_code.objects.get(pk=res).total)+"g" 
-                                +" \t열량: "+ str(Bar_code.objects.get(pk=res).kcal)+"g" 
+                                +" \t열량: "+ str(Bar_code.objects.get(pk=res).kcal)+"kcal" 
                                 +" \t탄수화물: "+ str(Bar_code.objects.get(pk=res).carbo)+"g"
                                 +" \t단백질: "+ str(Bar_code.objects.get(pk=res).protein)+"g"
                                 +" \t지방: "+ str(Bar_code.objects.get(pk=res).fat)+"g")

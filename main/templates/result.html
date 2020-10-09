@@ -1,12 +1,18 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-    <h1>이 상품들의 가격은?</h1>
-    {% for bar in bar_list %}
-        {{ bar }}<br>
-    {% endfor %}
+<br><br><br>
+<center>
+    <img src= "/static/img/list.png" alt="제품"width="150"  >
+
+    <h5 style="color:crimson;font-weight:bold;">--------------------------------------------</h5>
+        <h5 style="color:rgb(92, 63, 63);font-weight:bold">{% for bar in bar_list %}
+        +{{ bar }}<br>
+    {% endfor %}</h5>
 
 <br><br><br><br><br><br><br>
-    <h1>합계 : {{ result }}원</h1>
-
-    <a href="{% url 'main:home' %}">다시하기</a>
+<h5 style="color:crimson;font-weight:bold;">--------------------------------------------</h5>
+<h3 style="font-weight:bold;color:crimson">=총 희망소비자가격 \{{ result }}원</h3>
+<br><br><br><br>
+    <a style="font-weight:bold;color:crimson" href="{% url 'main:home' %}">다시하기</a>
+        </center>
 {% endblock %}

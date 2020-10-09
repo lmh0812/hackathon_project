@@ -3,13 +3,13 @@
 &nbsp &nbsp &nbsp &nbsp&nbsp &nbsp &nbsp &nbsp&nbsp &nbsp 
 <br><br>
 <center>
-    <img src= "/static/img/sch.png" alt="사진검색"width="180"></img>
+    <img src= "/static/img/total.png" alt="사진검색"width="220"></img>
     <br><br><br>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
         
-     <button type="submit" class="btn btn-danger">비교하기</button>
+     <button type="submit" class="btn btn-danger">계산하기</button>
 
     </form>
     {% if message %}
