@@ -1,5 +1,5 @@
 from django.contrib import admin
-from main.models import Bar_code, Upload_Img, Upload_Code, Review, Choice, Upload
+from main.models import Bar_code, Upload_Img, Upload_Code, Review, Choice, Upload, Test
 
 from import_export.admin import ExportActionModelAdmin, ImportExportMixin, ImportMixin
 
@@ -21,3 +21,5 @@ admin.site.register(Upload_Code)
 admin.site.register(Review)
 admin.site.register(Choice, Choice_Admin)
 admin.site.register(Upload)
+
+admin.site.register(Test)

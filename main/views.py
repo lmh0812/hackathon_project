@@ -4,7 +4,7 @@ from django.urls import reverse, reverse_lazy
 from .forms import PostForm, UploadForm_Img, UploadForm_Code, Multi_Upload, ReviewForm
 from django.utils import timezone
 
-from main.models import Bar_code, Upload_Img, Upload_Code, Upload, Review, Choice
+from main.models import Bar_code, Upload_Img, Upload_Code, Upload, Review, Choice, Test
 from .bar_read import bar_read
 from django.conf import settings
 
@@ -224,3 +224,8 @@ def cal_result(request):
     else:
         form = Multi_Upload()
     return render(request, 'upload_img_cal.html', {'form': form})
+
+
+def test_image(request):
+    image_list = Test.objects.all()
+    return render(request, 'test_image.html', {'image_list':image_list})

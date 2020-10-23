@@ -58,3 +58,6 @@ class Choice(models.Model):
 
 class Upload(models.Model):
     image = models.FileField()
+
+class Test(models.Model):
+    image = models.ImageField()

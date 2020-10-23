@@ -1,0 +1,10 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<center>
+    <h4 style=color:crimson>이미지를 다른 이름으로 저장한 후 검색해보세요!</h4><br>
+</center>
+    {% for test in image_list %}
+        <img src="{{ test.image.url }}" width="400">
+    {% endfor %}
+    
+{% endblock %}
