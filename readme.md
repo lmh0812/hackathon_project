@@ -37,21 +37,13 @@
 
 ## Demo
 #### 테스트용 이미지 다운
-<video autoplay loop>
-  <source src="/Demo/테스트용 이미지 다운.mp4" type="mp4">
-</video><br>
+<img src="./Demo/테스트용 이미지 다운.gif" alt="no" width="800">
 
 #### 사진으로 바코드 검색
-<video autoplay loop>
-  <source src="/Demo/사진으로 검색하기.mp4" type="mp4">
-</video><br>
+<img src="./Demo/사진으로 검색하기.gif" alt="no" width="800">
 
 #### 가격 총 합계
-<video autoplay loop>
-  <source src="/Demo/가격 계산하기.mp4" type="mp4">
-</video><br>
+<img src="./Demo/가격 계산하기.gif" alt="no" width="800">
 
 #### 영양성분 총 합계
-<video autoplay loop>
-  <source src="/Demo/영양성분 계산하기.mp4" type="mp4">
-</video>
+<img src="./Demo/영양성분합계.gif" alt="no" width="800">
