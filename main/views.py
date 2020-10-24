@@ -226,6 +226,6 @@ def cal_result(request):
     return render(request, 'upload_img_cal.html', {'form': form})
 
 
-def test_image(request):
-    image_list = Test.objects.all()
-    return render(request, 'test_image.html', {'image_list':image_list})
+# def test_image(request):
+#     image_list = Test.objects.all()
+#     return render(request, 'test_image.html', {'image_list':image_list})
